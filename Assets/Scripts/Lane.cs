@@ -18,29 +18,26 @@ public class Lane : MonoBehaviour
 
     private int spawnIndex = 0;
     private int inputIndex = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         // Handle spawning notes
         // Check if there's more notes TO be spawned
+        
+        // Checks the timeStamps to see if there's more notes to spawn
         if (spawnIndex < timeStamps.Count)
         {
             if (SongManager.GetAudioSourceTime() >= timeStamps[spawnIndex] - SongManager.Instance.noteTime)
             {
                 GameObject note = Instantiate(notePrefab, transform);
                 notes.Add(note.GetComponent<Note>());
-                note.GetComponent<Note>().assignedTime = (float)timeStamps[spawnIndex] - SongManager.Instance.noteTime;
+                // Assignedtime is the spawn time minus the amount of time the note is supposed to be available for
+                note.GetComponent<Note>().assignedTime = (float)timeStamps[spawnIndex] - SongManager.Instance.noteTime; //  
                 spawnIndex++;
             }
         }
-        
-        // Check each timstamp for notes one by one
+
+        // Check each timestamps for notes one by one
         if (inputIndex < timeStamps.Count)
         {
             double timeStamp = timeStamps[inputIndex];

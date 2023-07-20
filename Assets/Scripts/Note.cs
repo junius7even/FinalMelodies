@@ -16,15 +16,17 @@ public class Note : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        double timeSinceInstantiated = SongManager.GetAudioSourceTime() - timeInstantiated;
+        double timeSinceInstantiated = SongManager.GetAudioSourceTime() - assignedTime;
         float t = (float)(timeSinceInstantiated / (SongManager.Instance.noteTime * 2));
-
+        
+        // Destroy game object if 
         if (t > 1)
         {
             Destroy(gameObject);
         }
         else
         {
+            // Movement towards the end of the screen
             transform.localPosition = Vector3.Lerp(Vector3.right * SongManager.Instance.noteSpawnX,
                 Vector3.right * SongManager.Instance.noteDespawnX, t);
         }

@@ -91,6 +91,9 @@ public class SongManager : MonoBehaviour
         // AudioSource.time returns a float instead of a double. We NEED the accuracy.
         
         // Return timeSamples divided by the sample rate/frequency of the clip
+        Debug.Log("Samples: " + (double) Instance.audioSource.timeSamples);
+        Debug.Log("Freq: " + (double) Instance.audioSource.clip.frequency);
+
         return (double) Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
     }
     
@@ -98,6 +101,8 @@ public class SongManager : MonoBehaviour
     {
         // Plays Audio Source
         audioSource.Play();
+
+        //audioSource.PlayOneShot(audioSource.clip);
         
     }
 
@@ -106,11 +111,5 @@ public class SongManager : MonoBehaviour
         Debug.Log(Application.streamingAssetsPath + "/" + fileLocation);
         midiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + fileLocation);
         GetDataFromMidi();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

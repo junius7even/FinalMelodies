@@ -1026,7 +1026,7 @@ MonoBehaviour:
   audioSource: {fileID: 1725581827}
   inputDelayInMilliseconds: 0
   songDelayInSeconds: 0
-  marginOfError: 0.1
+  marginOfError: 0.8
   fileLocation: DanseMacabre.mid
   noteTime: 1
   noteSpawnX: 7
