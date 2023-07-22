@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,17 +15,27 @@ public class SongManager : MonoBehaviour
     public int inputDelayInMilliseconds;
     public float songDelayInSeconds; // InSeconds
     public double marginOfError; // in seconds
-
+    public double travelTime;
     public string fileLocation;
     public float noteTime; // player reaction time
     public float noteSpawnX, noteTapX;
 
+    public Animator playerAnimator;
+    public Transform playerTransform;
+    private int attackHash = Animator.StringToHash("Attack");
+    
     public float noteDespawnX
     {
         get
         {
             return noteTapX - (noteSpawnX - noteTapX);
         }
+    }
+
+    public static void PlayVoiceOver(string character, string clipName)
+    {
+        AudioClip clip = Resources.Load<AudioClip>($"Sound/VA/{character.ToUpper()}/{clipName}");
+
     }
 
     public static MidiFile midiFile;
@@ -41,6 +52,32 @@ public class SongManager : MonoBehaviour
         else
         {
             ReadFromFile();
+        }
+    }
+
+    private void Update()
+    {
+        HandlePlayerInput();
+    }
+
+    private void HandlePlayerInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Z) )
+        {
+            playerAnimator.SetTrigger(attackHash);
+            playerTransform.transform.position = new UnityEngine.Vector3(-5, 2, 0);
+
+        }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            playerAnimator.SetTrigger(attackHash);
+            playerTransform.transform.position = new UnityEngine.Vector3(-5, -0.1f, 0);
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            playerAnimator.SetTrigger(attackHash);
+            playerTransform.transform.position = new UnityEngine.Vector3(-5, -3, 0);
+
         }
     }
 
@@ -91,8 +128,6 @@ public class SongManager : MonoBehaviour
         // AudioSource.time returns a float instead of a double. We NEED the accuracy.
         
         // Return timeSamples divided by the sample rate/frequency of the clip
-        Debug.Log("Samples: " + (double) Instance.audioSource.timeSamples);
-        Debug.Log("Freq: " + (double) Instance.audioSource.clip.frequency);
 
         return (double) Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
     }

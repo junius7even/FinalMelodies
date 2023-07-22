@@ -10,19 +10,26 @@ public class ComboManager : MonoBehaviour
     public AudioSource missVFX;
 
     public TMPro.TextMeshProUGUI comboScoreText;
+    public TMPro.TextMeshProUGUI totalScoreText;
+
     public static int comboScore;
+    public static int totalScore;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
         comboScore = 0;
+        totalScore = 0;
     }
 
     public static void Hit()
     {
         Instance.hitVFX.PlayOneShot(Instance.hitVFX.clip);
         comboScore++;
+        totalScore++;
+        totalScore += (int)((double)comboScore / 5 * 1.7);
     }
 
     public static void Miss()
@@ -35,5 +42,7 @@ public class ComboManager : MonoBehaviour
     void Update()
     {
         comboScoreText.text = comboScore.ToString();
+        totalScoreText.text = totalScore.ToString();
+
     }
 }

@@ -50,9 +50,18 @@ TagManager:
   - name: Notes
     uniqueID: 3671318661
     locked: 0
-  - name: Player
+  - name: Parallax
     uniqueID: 1113187495
     locked: 0
-  - name: UI
+  - name: HUD
     uniqueID: 177513825
+    locked: 0
+  - name: Enemies
+    uniqueID: 3910921629
+    locked: 0
+  - name: Player
+    uniqueID: 3670729071
+    locked: 0
+  - name: UI
+    uniqueID: 512720211
     locked: 0

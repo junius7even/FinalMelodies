@@ -16,8 +16,12 @@ public class Lane : MonoBehaviour
 
     public List<double> timeStamps = new List<double>();
 
+    
     private int spawnIndex = 0;
     private int inputIndex = 0;
+
+    
+    private int takeDamageHash = Animator.StringToHash("TakeDamage");
 
     void Update()
     {
@@ -27,12 +31,12 @@ public class Lane : MonoBehaviour
         // Checks the timeStamps to see if there's more notes to spawn
         if (spawnIndex < timeStamps.Count)
         {
-            if (SongManager.GetAudioSourceTime() >= timeStamps[spawnIndex] - SongManager.Instance.noteTime)
+            if (SongManager.GetAudioSourceTime() >= timeStamps[spawnIndex] - SongManager.Instance.noteTime) ;
             {
                 GameObject note = Instantiate(notePrefab, transform);
                 notes.Add(note.GetComponent<Note>());
                 // Assignedtime is the spawn time minus the amount of time the note is supposed to be available for
-                note.GetComponent<Note>().assignedTime = (float)timeStamps[spawnIndex] - SongManager.Instance.noteTime; //  
+                note.GetComponent<Note>().assignedTime = (float)timeStamps[spawnIndex] - SongManager.Instance.noteTime - (float)SongManager.Instance.travelTime; //  
                 spawnIndex++;
             }
         }
@@ -47,6 +51,7 @@ public class Lane : MonoBehaviour
 
             if (Input.GetKeyDown(input))
             {
+                // Checks if the note should be destroyed based on the timing
                 if (Math.Abs(audioTime - timeStamp) < marginOfError)
                 {
                     Hit();
@@ -77,6 +82,7 @@ public class Lane : MonoBehaviour
     private void Miss()
     {
         ComboManager.Miss();
+        SongManager.Instance.playerAnimator.SetTrigger(takeDamageHash);
     }
 
     public void SetTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array)

@@ -14,7 +14,7 @@ public class Note : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         double timeSinceInstantiated = SongManager.GetAudioSourceTime() - assignedTime;
         float t = (float)(timeSinceInstantiated / (SongManager.Instance.noteTime * 2));
