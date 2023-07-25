@@ -43,15 +43,18 @@ public class TextManager : StateHandler
     }
     
     
-    protected override void FadeInDialogue()
+    protected internal override void EnterFadeInDialogue()
     {
         dialoguePanel.GetComponent<Animator>().SetTrigger(FadeInHash);
         namePanel.GetComponent<Animator>().SetTrigger(FadeInHash);
     }
 
-    protected override void FadeOutDialogue()
+    protected internal override void EnterFadeOutDialogue()
     {
         dialoguePanel.GetComponent<Animator>().SetTrigger(FadeOutHash);
+        nameText.text = "";
+        accentNameText.text = "";
+        dialogueText.text = "";
         namePanel.GetComponent<Animator>().SetTrigger(FadeOutHash);
     }
 }

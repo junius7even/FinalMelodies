@@ -25,22 +25,26 @@ public class DialogueManager : StateHandler
     [SerializeField] private PortraitManager portraitManager;
     [SerializeField] private TextManager textManager;
     [SerializeField] private TextAsset storyToPlay;
+    [SerializeField] private TextAsset[] storiesToPlay;
     private string nextStoryLine = "";
     private string nextSpeaker = "";
     private string currentSpeaker = "";
 
     private string[] validCharacters = { "penelope", "ithma", "titus", "thevoice" };
+    private string[] validSfx = { "Stab", "FireWood"};
     
     // INK related variables
+    private int currentStoryNumber = 0;
     private Story currentStory; // Holds the current script
 
     private bool displayingChoices;
     private bool animationFinished;
+    private bool finishedStory = false;
     
     // Start is called before the first frame update
     void Start()
     {
-        EnterDialogueMode(storyToPlay);
+        // EnterDialogueMode(storyToPlay);
     }
 
     public void EnterDialogueMode(TextAsset inkJSON)
@@ -65,6 +69,7 @@ public class DialogueManager : StateHandler
         else
         {
             SwitchStates(States.DialogueStates.FadeOutDialogue);
+            finishedStory = true;
         }
     }
 
@@ -80,6 +85,8 @@ public class DialogueManager : StateHandler
                 string storyTag = currentStory.currentTags[i];
                 int number;
                 // If there's a valid character
+                Debug.Log("tag: " + storyTag);
+
                 if (validCharacters.Contains(storyTag.ToLower()))
                 {
                     speakerName = storyTag;
@@ -98,13 +105,29 @@ public class DialogueManager : StateHandler
                 }
             }
         }
+        else
+        {
+            if (currentSpeaker != "")
+                swapSpeaker = true;
+        }
         // Set the new speaker to the one now --> one to be displayed
         currentSpeaker = speakerName;
         textManager.ReceiveName(speakerName);
         if (swapSpeaker)
+            portraitManager.LoadPortrait(speakerName + portraitNumber);
+        else
         {
-            portraitManager.SwapSpeakers(speakerName + portraitNumber);
+            portraitManager.LoadPortrait("");
+
         }
+        /*
+        if (swapSpeaker)
+            portraitManager.SwapSpeakers(speakerName + portraitNumber);
+        else
+        {
+            portraitManager.LoadPortrait(speakerName + portraitNumber);
+        }
+        */
     }
     
     // OVERRIDEN FUNCTIONS
@@ -117,6 +140,36 @@ public class DialogueManager : StateHandler
     protected override void NoDialogue()
     {
         base.NoDialogue();
-        
+        if (!finishedStory)
+            EnterDialogueMode(storyToPlay);
+    }
+
+    protected internal override  void EnterFadeInDialogue()
+    {
+        base.EnterFadeInDialogue();
+        textManager.EnterFadeInDialogue();
+        portraitManager.EnterFadeInDialogue();
+    }
+
+    protected internal override void EnterFadeOutDialogue()
+    {
+        base.EnterFadeOutDialogue();
+        textManager.EnterFadeOutDialogue();
+        portraitManager.EnterFadeOutDialogue();
+    }
+
+    protected internal override void EnterDisplayDialogue()
+    {
+        base.EnterDisplayDialogue();
+        portraitManager.EnterDisplayDialogue();
+        textManager.EnterDisplayDialogue();
+    }
+
+    protected internal override void EnterNoDialogue()
+    {
+        if (currentStoryNumber < storiesToPlay.Length)
+        base.EnterNoDialogue();
+        portraitManager.EnterNoDialogue();
+        textManager.EnterNoDialogue();
     }
 }

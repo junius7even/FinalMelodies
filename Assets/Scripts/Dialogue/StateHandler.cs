@@ -46,10 +46,35 @@ public class StateHandler : MonoBehaviour
     {
         States.LastState = States.CurrentState;
         States.CurrentState = nextState;
+        switch (nextState)
+        {
+            case States.DialogueStates.FadeInDialogue:
+            {
+                EnterFadeInDialogue();
+                break;
+            }
+            case States.DialogueStates.DisplayDialogue:
+            {
+                EnterDisplayDialogue();
+                break;
+            }
+            case States.DialogueStates.FadeOutDialogue:
+            {
+                EnterFadeOutDialogue();
+                break;
+            }
+            case States.DialogueStates.NoDialogue:
+            {
+                Debug.Log("No Dialogue");
+                EnterNoDialogue();
+                break;
+            }
+        }
     }
 
-    protected internal void HandleStates(States.DialogueStates currentDialogueState)
+    protected void HandleStates(States.DialogueStates currentDialogueState)
     {
+        
         switch (currentDialogueState)
         {
             case States.DialogueStates.FadeInDialogue:
@@ -69,11 +94,12 @@ public class StateHandler : MonoBehaviour
             }
             case States.DialogueStates.NoDialogue:
             {
-                Debug.Log("No Dialogue");
+                // Debug.Log("No Dialogue");
                 NoDialogue();
                 break;
             }
         }
+        
     }
     
     protected virtual void FadeInDialogue() {}
@@ -81,10 +107,10 @@ public class StateHandler : MonoBehaviour
     protected virtual void FadeOutDialogue() {}
     protected virtual void NoDialogue() {}
     
-    /*
-    protected virtual void EnterFadeInDialogue() {}
-    protected virtual void EnterDisplayDialogue() {}
-    protected virtual void EnterFadeOutDialogue() {}
-    protected virtual void EnterNoDialogue() {}
-    */
+    
+    protected virtual internal void EnterFadeInDialogue() {}
+    protected virtual internal void EnterDisplayDialogue() {}
+    protected virtual internal void EnterFadeOutDialogue() {}
+    protected virtual internal void EnterNoDialogue() {}
+    
 }

@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AccentPortrait
+  m_Controller: {fileID: 9100000, guid: 85c4e147411615c45bec27af53e8f4c3, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 08e11d956793f0e45a17eb1926b8abc5, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6448260607e199643b4a8d66348fc81b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: bd12964440a44a54db1d9c20b9a7e13c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cfbc077455346ed4d9afe4a9ed958638, type: 2}
