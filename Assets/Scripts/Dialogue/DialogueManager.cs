@@ -39,7 +39,7 @@ public class DialogueManager : StateHandler
     private string[] validBattles = { "Level1", "Level2", "Ending" };
     
     // INK related variables
-    [SerializeField]public static int currentStoryNumber = 2;
+    [SerializeField]public static int currentStoryNumber = 0;
     private Story currentStory; // Holds the current script
 
     private bool displayingChoices;
