@@ -175,13 +175,9 @@ public class DialogueManager : StateHandler
         // Set the new speaker to the one now --> one to be displayed
         currentSpeaker = speakerName;
         textManager.ReceiveName(speakerName);
-        if (swapSpeaker)
-            portraitManager.LoadPortrait(speakerName + portraitNumber);
-        else
-        {
-            portraitManager.LoadPortrait("");
-
-        }
+        
+        portraitManager.LoadPortrait(speakerName + portraitNumber);
+        
         /*
         if (swapSpeaker)
             portraitManager.SwapSpeakers(speakerName + portraitNumber);

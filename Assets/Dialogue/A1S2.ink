@@ -70,9 +70,10 @@ Then that is the price you must pay for revenge. #TheVoice
 What will the end be like? #Ithma #6
 Painless. Gone in an instant. #TheVoice
 ... And nothing like this will ever happen again. #Ithma #7
-Guide me, Mr.Voice #Ithma #7
+...Guide me. #Ithma #7
 As you wish... #TheVoice
 ... #Ithma #10
-...#Ithma #11
-... #Ithma #14
-Let's go. #Ithma #13 #Level2
+....#Ithma #11
+..... #Ithma #14
+Let's go. #Ithma #13 
+... #Level2
