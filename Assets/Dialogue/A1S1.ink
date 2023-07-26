@@ -1,4 +1,4 @@
-Ow! Why’d you hit me so hard! #Penelope
+Ow! Why’d you hit me so hard! #Penelope #calm-music
 Because you’re the witch and I’m the royal knight! #Titus #C1_BecauseYoureTheWitch2
 But I’m always playing the witch… no fair! #Penelope
 I promise the next time I’ll let you be the knight, pinky promise. #Titus #C1_iPromiseTheNext2
@@ -13,9 +13,11 @@ Why are you still up? #Ithma #3 #P_WhyAreYouStillUp_1
 I can't sleep... and my arm still hurts a little. #Penelope
 Let me take a look #Ithma #2 #P_LetMeTakeALook2
 (Sniffs) #Penelope
-What's the matter? #Ithma #3
+What's the matter? #Ithma #3 #P_WhatsTheMatter_1
 (Sniffs) #Penelope
-...How about this, I'll play you my favourite song on the piano. It always calms me down, and I'm sure you'll like it too. #Ithma #1 #HowAboutThis_2
+...How about this, I'll play you my favourite song on the piano. It always calms me down, and I'm sure you'll like it too. #Ithma #1 #P_HowAboutThis_2
 Music won’t make my arm hurt any less… #Penelope
 That’s true, but music always soothes the heart. And I hope you’ll understand that too.#Ithma #4 #P_ThatsTrueButMusic_1
-I’ll try... #Penelope
+I’ll try... #Penelope 
+Use your Z, X, and C buttons to sweep away the little creatures coming at you! The more on beat you are to the red line, the higher your score will be!
+... #Level1

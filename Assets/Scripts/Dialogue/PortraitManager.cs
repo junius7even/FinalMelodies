@@ -57,7 +57,7 @@ public class PortraitManager : StateHandler
     {
         Debug.Log("Swapping speakers");
         Debug.Log("Last state: " +States.LastState);
-
+        
         portraitImage.sprite = Resources.Load<Sprite>(PortraitSpritePath+nextSpeaker);
         accentImage.sprite = Resources.Load<Sprite>(PortraitSpritePath+nextSpeaker);
     }
@@ -65,6 +65,7 @@ public class PortraitManager : StateHandler
     public void LoadPortrait(string imageName)
     {
         Debug.Log("Image name: " + imageName);
+        Debug.Log("Path" + PortraitSpritePath + imageName);
         if (imageName == "")
             return;
         portraitImage.sprite = Resources.Load<Sprite>(PortraitSpritePath+imageName);

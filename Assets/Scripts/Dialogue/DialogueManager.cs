@@ -5,6 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using Ink.Runtime;
+using UnityEngine.SceneManagement;
 
 public static class States
 {
@@ -23,28 +24,37 @@ public static class States
 public class DialogueManager : StateHandler
 {
     [SerializeField] private PortraitManager portraitManager;
-    [SerializeField] private TextManager textManager;
-    [SerializeField] private TextAsset storyToPlay;
+    [SerializeField] private TextManager textManager; 
+    public TextAsset storyToPlay;
     [SerializeField] private TextAsset[] storiesToPlay;
+    public SoundManager soundManager;
+
     private string nextStoryLine = "";
     private string nextSpeaker = "";
     private string currentSpeaker = "";
 
-    private string[] validCharacters = { "penelope", "ithma", "titus", "thevoice" };
-    private string[] validSfx = { "Stab", "FireWood"};
+    private string[] validCharacters = { "penelope", "ithma", "titus", "thevoice", "knight", "elethea" };
+    private string[] validSfx = { "Slash", "FireWood", "door break", "door knock1", "door knock2", "DropDown-Wood", "Heartbeat"};
+    private string[] validMusic = { "Nocturne", "calm-music", "DiesIrae"};
+    private string[] validBattles = { "Level1", "Level2" };
     
     // INK related variables
-    private int currentStoryNumber = 0;
+    [SerializeField]public static int currentStoryNumber;
     private Story currentStory; // Holds the current script
 
     private bool displayingChoices;
     private bool animationFinished;
     private bool finishedStory = false;
+
+    private bool shouldSceneChange;
     
     // Start is called before the first frame update
     void Start()
     {
         // EnterDialogueMode(storyToPlay);
+
+        // EnterDialogueMode(storiesToPlay[currentStoryNumber]);
+        // storyToPlay = Resources.Load<TextAsset>($"Dialogue/A1S2");
     }
 
     public void EnterDialogueMode(TextAsset inkJSON)
@@ -60,17 +70,45 @@ public class DialogueManager : StateHandler
             Debug.Log("Thingy");
             // Get the next line of dialogue
             nextStoryLine = currentStory.Continue();
-            HandleTags();
-            Debug.Log("Next storyline: " + nextStoryLine);
             textManager.ReceiveDialogue(nextStoryLine);
+            HandleTags();
             if (States.CurrentState == States.DialogueStates.NoDialogue)
                 SwitchStates(States.DialogueStates.FadeInDialogue);
+            Debug.Log("Next storyline: " + nextStoryLine);
+            
         }
         else
         {
             SwitchStates(States.DialogueStates.FadeOutDialogue);
             finishedStory = true;
+            if (currentStoryNumber < storiesToPlay.Length)
+            {
+                currentStoryNumber++;
+                Debug.Log("Incremented: " + currentStoryNumber);
+            }
         }
+    }
+
+    private void Update()
+    {
+        Debug.Log("Storiestoplay.length: " + storiesToPlay.Length);
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SwitchStates(States.DialogueStates.NoDialogue);
+        Debug.Log("Current story number: " + currentStoryNumber);
+        EnterDialogueMode(storiesToPlay[currentStoryNumber]);
     }
 
     private void HandleTags()
@@ -101,7 +139,31 @@ public class DialogueManager : StateHandler
                 }
                 else 
                 {
-                    // TODO: Handle voiceover
+                    // TODO: Handle voiceover and music
+                    if (validMusic.Contains(storyTag))
+                    {
+                        soundManager.PlayAmbience(storyTag);
+                    }
+                    else if (validSfx.Contains(storyTag))
+                    {
+                        soundManager.PlayEffect(storyTag);
+                    }
+                    else if (validBattles.Contains(storyTag))
+                    {
+                        SwitchStates(States.DialogueStates.FadeOutDialogue);
+                        finishedStory = true;
+                        if (currentStoryNumber < storiesToPlay.Length)
+                        {
+                            currentStoryNumber++;
+                            Debug.Log("Incremented: " + currentStoryNumber);
+                        }
+                        SceneManager.LoadScene(storyTag);
+                    }
+                    // The rest are all voiceovers
+                    else
+                    {
+                        soundManager.PlayVoiceOver(speakerName, storyTag);
+                    }
                 }
             }
         }
@@ -156,6 +218,7 @@ public class DialogueManager : StateHandler
         base.EnterFadeOutDialogue();
         textManager.EnterFadeOutDialogue();
         portraitManager.EnterFadeOutDialogue();
+        SwitchStates(States.DialogueStates.NoDialogue);
     }
 
     protected internal override void EnterDisplayDialogue()
@@ -167,7 +230,6 @@ public class DialogueManager : StateHandler
 
     protected internal override void EnterNoDialogue()
     {
-        if (currentStoryNumber < storiesToPlay.Length)
         base.EnterNoDialogue();
         portraitManager.EnterNoDialogue();
         textManager.EnterNoDialogue();

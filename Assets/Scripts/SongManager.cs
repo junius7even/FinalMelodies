@@ -7,6 +7,7 @@ using Melanchall.DryWetMidi.Interaction;
 using System.IO;
 using System.Numerics;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class SongManager : MonoBehaviour
 {
@@ -58,6 +59,21 @@ public class SongManager : MonoBehaviour
     private void Update()
     {
         HandlePlayerInput();
+        
+    }
+
+    private void LateUpdate()
+    {
+        if (!audioSource.isPlaying)
+        {
+            SceneManager.LoadScene("IntroScene");
+        }
+        /*
+         * if (audioSource.time >= audioSource.clip.length)
+        {
+            SceneManager.LoadScene("IntroScene");
+        }
+         */
     }
 
     private void HandlePlayerInput()

@@ -19,15 +19,19 @@ public class TextManager : StateHandler
 
     private void Start()
     {
+        /*
         dialogueText.text = "";
         nameText.text = "";
         accentNameText.text = "";
+        */
     }
 
     public void ReceiveDialogue(string dialogue)
     {
+        
         Debug.Log("Dialogue: " + dialogue);
         dialogueText.text = dialogue;
+        Debug.Log("DialogueText is: "+ dialogueText.text);
     }
 
     public void ReceiveName(string speakerName)

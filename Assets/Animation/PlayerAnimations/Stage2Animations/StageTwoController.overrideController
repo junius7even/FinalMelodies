@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: StageTwoController
+  m_Controller: {fileID: 9100000, guid: 2f228414fbefb42479ae7f6db37393c3, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: bc3eacf4a85e3b448831a76c3ff6de3d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cf815b83bc1067c47ba8ea1aa7b1b483, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0ceeb9a601ff66d48b838c947ae146b1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a4a35fffe3f01da47a1496747c3fd0bc, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 09ecc53ff90a9ab469940209aac49d96, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6b078ee3af4e18542bc41e6bbc70644a, type: 2}
