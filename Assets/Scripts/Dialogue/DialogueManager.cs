@@ -36,10 +36,10 @@ public class DialogueManager : StateHandler
     private string[] validCharacters = { "penelope", "ithma", "titus", "thevoice", "knight", "elethea" };
     private string[] validSfx = { "Slash", "FireWood", "door break", "door knock1", "door knock2", "DropDown-Wood", "Heartbeat"};
     private string[] validMusic = { "Nocturne", "calm-music", "DiesIrae"};
-    private string[] validBattles = { "Level1", "Level2" };
+    private string[] validBattles = { "Level1", "Level2", "Ending" };
     
     // INK related variables
-    [SerializeField]public static int currentStoryNumber;
+    [SerializeField]public static int currentStoryNumber = 2;
     private Story currentStory; // Holds the current script
 
     private bool displayingChoices;

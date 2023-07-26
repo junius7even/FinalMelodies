@@ -10,5 +10,6 @@ Of all those I've given the power to, you are the first to choose the end of the
 At least there will never be more who suffered as I did. #Ithma #8
 There can be no suffering when there is no one to suffer. #Ithma #2
 ... #Ithma #3
-Titus, Penelope, Doctor Elethea. I'll join you in just a second! #Ithma #4 #Ending
+Titus, Penelope, Doctor Elethea. I'll join you in just a second! #Ithma #4 
+#Ending
 ->END
